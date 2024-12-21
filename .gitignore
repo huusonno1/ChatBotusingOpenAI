@@ -1,0 +1,50 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Database
+chroma_db/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local development configuration
+instance/
+.webassets-cache
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Static files
+static/temp/
+static/uploads/
+
+# Temporary files
+*.tmp
+*~
