@@ -98,7 +98,17 @@ def add_product_data():
             }
         },
         {
-            "document": "Áo khoác Windbreaker Light được làm từ vải dù cao cấp, chống nước nhẹ, có mũ. Giá: 680.000 VNĐ. Size: S-XXL. Màu sắc: đen, xanh army, be. Phù hợp mặc mùa mưa hoặc thời tiết se lạnh.",
+            "document": "Áo khoác Windbreaker Light được làm từ vải dù cao cấp, chống nước nhẹ, có mũ. Size: S-XXL. Màu sắc: đen, xanh army, be. Phù hợp mặc mùa mưa hoặc thời tiết se lạnh.",
+            "metadata": {
+                "category": "outerwear",
+                "type": "jacket",
+                "price": 680000,
+                "timestamp": datetime.now().isoformat(),
+                "season": "rainy, cold"
+            }
+        },
+        {
+            "document": "Áo khoác VN được làm từ vải dù cao cấp, chống nước nhẹ, có mũ. Size: S-XXL. Màu sắc: đen, xanh army, be. Phù hợp mặc mùa mưa hoặc thời tiết se lạnh.",
             "metadata": {
                 "category": "outerwear",
                 "type": "jacket",

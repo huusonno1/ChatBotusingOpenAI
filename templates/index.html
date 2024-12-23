@@ -196,20 +196,81 @@
             });
         }
 
+        function formatMessage(text) {
+            // Xử lý markdown bold tags
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // Xử lý danh sách sản phẩm
+            if (text.includes('danh mục sau:')) {
+                // Tách các phần của tin nhắn
+                const parts = text.split('\n\n');
+                let formattedHtml = '';
+
+                parts.forEach(part => {
+                    if (part.match(/^\d\./)) {  // Nếu là danh sách đánh số
+                        const items = part.split('\n');
+                        items.forEach(item => {
+                            if (item.trim()) {
+                                formattedHtml += `<div class="product-category">${item}</div>`;
+                            }
+                        });
+                    } else {
+                        formattedHtml += `<p class="message-text">${part}</p>`;
+                    }
+                });
+
+                return formattedHtml;
+            }
+
+            // Xử lý xuống dòng thông thường
+            return text.split('\n').map(line =>
+                line.trim() ? `<p class="message-text">${line}</p>` : '<br>'
+            ).join('');
+        }
+
+        // Cập nhật hàm addMessage
         function addMessage(text, sender) {
             const messages = document.getElementById('chat-messages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}-message`;
 
-            const messageContent = document.createElement('div');
-            messageContent.textContent = text;
+            // Thêm CSS cho tin nhắn
+            const style = document.createElement('style');
+            style.textContent = `
+                .product-category {
+                    padding: 8px 12px;
+                    margin: 4px 0;
+                    background-color: ${sender === 'bot' ? '#f8f9fa' : '#e3f2fd'};
+                    border-radius: 8px;
+                    border-left: 4px solid #0084ff;
+                }
 
+                .product-category strong {
+                    color: #0084ff;
+                    font-weight: 600;
+                }
+
+                .message-text {
+                    margin: 8px 0;
+                    line-height: 1.5;
+                }
+
+                .bot-message .message-text:last-child {
+                    color: #666;
+                    font-style: italic;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Format và thêm nội dung
+            messageDiv.innerHTML = formatMessage(text);
+
+            // Thêm timestamp
             const timestamp = document.createElement('div');
             timestamp.className = 'timestamp';
             timestamp.textContent = getTimestamp();
-
-            messageDiv.appendChild(messageContent);
             messageDiv.appendChild(timestamp);
+
             messages.appendChild(messageDiv);
             messages.scrollTop = messages.scrollHeight;
         }
